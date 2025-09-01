@@ -1,0 +1,121 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+@font-face {
+  font-family: "LINESeedSansTH";
+  src: url("https://cdn.jsdelivr.net/gh/ok1developer/NO1Money/LINESeedSansTH_W_Rg.woff")
+    format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "LINESeedSansTH";
+  src: url("https://cdn.jsdelivr.net/gh/ok1developer/NO1Money/LINESeedSansTH_W_Bd.woff")
+    format("woff");
+  font-weight: 700;
+}
+
+/* --- นี่คือจุดที่แก้ไข --- */
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "LINESeedSansTH";
+}
+
+
+/* ... โค้ดส่วนที่เหลือเหมือนเดิม ... */
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+.loader-circle {
+  animation: rotate4 2s linear infinite;
+}
+
+.loader-path {
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+.fade-to-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%; 
+  width: 150px;
+  background: linear-gradient(to left, black, transparent);
+  pointer-events: none;
+}
+
+.fixed-resolution-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: black;
+}
+
+.scaled-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform: translate(-50%, -50%) scale(min(var(--scale-x, 1), var(--scale-y, 1)));
+  transform-origin: center center;
+}
+@keyframes slide-in-pause-fade-out {
+  /* --- Phase 1: Slide In (0% -> 20%) --- */
+  0% {
+    transform: translateX(100%); /* เริ่มจากนอกจอฝั่งขวา */
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(0%); /* เลื่อนเข้ามาหยุดที่ตำแหน่งปกติ */
+    opacity: 1;
+  }
+
+  /* --- Phase 2: Pause (20% -> 80%) --- */
+  80% {
+    transform: translateX(0%); /* หยุดนิ่งอยู่ที่เดิม */
+    opacity: 1;
+  }
+
+  /* --- Phase 3: Fade Out (80% -> 100%) --- */
+  100% {
+    transform: translateX(0%); /* อยู่ที่เดิม แต่ค่อยๆ จางหายไป */
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-out {
+  /* 
+    เราจะกำหนด animation-duration ด้วย JavaScript
+    เพื่อให้สอดคล้องกับ SLIDE_DURATION ของรูปภาพ
+  */
+  animation-name: slide-in-pause-fade-out;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards; /* ทำให้หยุดอยู่ที่เฟรมสุดท้าย (opacity: 0) */
+}
